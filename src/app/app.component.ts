@@ -6,7 +6,7 @@ import { ArtistSearchComponent } from './components/artist-search/artist-search.
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
+  selector: '[root]',
   standalone: true,
   imports: [RouterOutlet, CommonModule, ArtistSearchComponent],
   templateUrl: './app.component.html',
