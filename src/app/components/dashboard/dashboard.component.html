@@ -1,0 +1,70 @@
+<div
+    class="p-6 gap-x-6 h-screen max-h-screen grid grid-cols-1 sm:grid-cols-2 overflow-hidden"
+    *ngIf="pageLoad"
+>
+    <h1 class="text-4xl font-bold m-auto">Mixr</h1>
+    <div class="w-full max-w-64 mx-auto" *ngIf="!accessToken">
+        <button
+            class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 w-full"
+            (click)="login()"
+        >
+            Sign into Spotify
+        </button>
+    </div>
+    <div *ngIf="accessToken" class="flex flex-col overflow-auto px-4 -mx-4">
+        <p>Access Token</p>
+        <app-artist-search
+            [accessToken]="accessToken"
+            (selectArtist)="selectArtist($event)"
+        ></app-artist-search>
+
+        <div class="mt-4 h-1/2 flex flex-wrap gap-2">
+            <div
+                *ngFor="let artist of selectedArtists"
+                class="bg-slate-200 text-slate-800 py-1 px-3 rounded-full flex items-center"
+                (click)="removeArtist(artist)"
+            >
+                {{ artist.name }}
+                <button class="ml-2">&minus;</button>
+            </div>
+        </div>
+
+        <form *ngIf="selectedArtists && selectedArtists.length">
+            <label for="playlistName" class="block mt-4">Playlist Name</label>
+            <input
+                type="text"
+                id="playlistName"
+                class="border rounded-lg text-black p-2 w-full"
+                [(ngModel)]="playlistName"
+                [ngModelOptions]="{ standalone: true }"
+            />
+            <label for="playlistDescription" class="block mt-4"
+                >Playlist Description</label
+            >
+            <textarea
+                id="playlistDescription"
+                class="border rounded-lg text-black p-2 w-full"
+                [(ngModel)]="playlistDescription"
+                [ngModelOptions]="{ standalone: true }"
+            ></textarea>
+        </form>
+
+        <button
+            class="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4"
+            (click)="createPlaylist()"
+            *ngIf="selectedArtists.length > 0"
+            [disabled]="!playlistName || !playlistName.length"
+        >
+            Create Playlist
+        </button>
+
+        <a
+            class="block text-green-500 mt-4"
+            [href]="playlistUrl"
+            target="_blank"
+            *ngIf="playlistUrl"
+        >
+            Open Playlist in Spotify
+        </a>
+    </div>
+</div>

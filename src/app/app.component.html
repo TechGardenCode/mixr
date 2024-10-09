@@ -1,0 +1,43 @@
+<!-- <div class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="bg-white p-8 rounded shadow-md text-center">
+        <h1 class="text-2xl font-bold mb-4">Spotify Playlist Creator</h1>
+        <button
+            class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600"
+            (click)="login()"
+            *ngIf="!accessToken"
+        >
+            Sign in with Spotify
+        </button>
+
+        <div *ngIf="accessToken">
+            <app-artist-search
+                [accessToken]="accessToken"
+                (selectArtist)="selectArtist($event)"
+            ></app-artist-search>
+
+            <ul class="mt-4">
+                <li *ngFor="let artist of selectedArtists">
+                    {{ artist.name }}
+                </li>
+            </ul>
+
+            <button
+                class="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4"
+                (click)="createPlaylist()"
+                *ngIf="selectedArtists.length > 0"
+            >
+                Create Playlist
+            </button>
+
+            <a
+                class="block text-green-500 mt-4"
+                [href]="playlistUrl"
+                target="_blank"
+                *ngIf="playlistUrl"
+            >
+                Open Playlist in Spotify
+            </a>
+        </div>
+    </div>
+</div> -->
+<router-outlet></router-outlet>
