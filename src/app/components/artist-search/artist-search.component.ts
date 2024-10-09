@@ -25,13 +25,7 @@ export class ArtistSearchComponent {
     @Input() accessToken = '';
     @Output() selectArtist = new EventEmitter<any>();
 
-    artistSearchForm: FormGroup = this.formBuilder.group({
-        searchText: [''],
-        filters: this.formBuilder.group({
-            type: this.formBuilder.array(['artist']),
-            market: ['US'],
-        }),
-    });
+    artistSearchForm: FormGroup;
 
     artists: any[] = [];
     searchTerm = '';
@@ -39,7 +33,15 @@ export class ArtistSearchComponent {
     constructor(
         private readonly spotifyService: SpotifyService,
         private readonly formBuilder: FormBuilder
-    ) {}
+    ) {
+        this.artistSearchForm = this.formBuilder.group({
+            searchText: [''],
+            filters: this.formBuilder.group({
+                type: this.formBuilder.array(['artist']),
+                market: ['US'],
+            }),
+        });
+    }
 
     onSearch(): void {
         if (this.searchTerm) {
