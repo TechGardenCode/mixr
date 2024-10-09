@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { PkceService } from './pkce.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { filter, firstValueFrom, map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpotifyService {
   private CLIENT_ID = '593be54702d94fdf83d2d4885605929d';
-  private REDIRECT_URI = 'http://localhost:4200';
+  private REDIRECT_URI = environment.REDIRECT_URI;
   private AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   private TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
   private SCOPES = [
